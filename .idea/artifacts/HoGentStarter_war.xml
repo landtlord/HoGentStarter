@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="HoGentStarter:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>HoGentStarter</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="HoGentStarter-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="HoGentStarter:war exploded" />
+    </root>
+  </artifact>
+</component>
