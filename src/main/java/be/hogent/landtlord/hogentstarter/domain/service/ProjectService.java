@@ -1,23 +1,34 @@
 package be.hogent.landtlord.hogentstarter.domain.service;
 
+import be.hogent.landtlord.hogentstarter.domain.bussines.Project;
+import be.hogent.landtlord.hogentstarter.domain.bussines.repository.ProjectRepository;
 import be.hogent.landtlord.hogentstarter.domain.service.dto.CommentDTO;
 import be.hogent.landtlord.hogentstarter.domain.service.dto.FundsDTO;
 import be.hogent.landtlord.hogentstarter.domain.service.dto.ProjectDTO;
+import be.hogent.landtlord.hogentstarter.domain.service.mappers.Mapper;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ProjectService {
+    private ProjectRepository projectRepository;
+
+    private Mapper<Project, ProjectDTO> projectMapper;
+
     public List<ProjectDTO> getAllProjects() {
-        return Collections.emptyList();
+        List<Project> projects = projectRepository.findAllProjects();
+        return projectMapper.toDTO(projects);
     }
 
     public ProjectDTO createProject(ProjectDTO projectDTO) {
-        return null;
+        Project project = projectMapper.toObject(projectDTO);
+        project = projectRepository.save(project);
+        return projectMapper.toDTO(project);
     }
 
     public ProjectDTO changeProject(ProjectDTO projectDTO) {
-        return null;
+        Project project = projectMapper.toObject(projectDTO);
+        project = projectRepository.update(project);
+        return projectMapper.toDTO(project);
     }
 
     public ProjectDTO deleteProject(ProjectDTO projectDTO) {
@@ -25,7 +36,9 @@ public class ProjectService {
     }
 
     public List<FundsDTO> getFundsFor(Long projectId) {
-        return Collections.emptyList();
+        Project project = projectRepository.findById(projectId);
+        ProjectDTO projectDTO = projectMapper.toDTO(project);
+        return projectDTO.getRaisedFunds();
     }
 
     public ProjectDTO addComment(Long projectId, CommentDTO commentDTO) {
