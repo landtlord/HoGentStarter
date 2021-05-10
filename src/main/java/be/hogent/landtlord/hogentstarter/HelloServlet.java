@@ -1,5 +1,7 @@
 package be.hogent.landtlord.hogentstarter;
 
+import be.hogent.landtlord.hogentstarter.domain.service.ProjectService;
+
 import java.io.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -7,6 +9,12 @@ import javax.servlet.annotation.*;
 @WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
     private String message;
+
+    private ProjectService projectService;
+
+    public HelloServlet() {
+        projectService = new ProjectService();
+    }
 
     public void init() {
         message = "Hello World Servlet!";

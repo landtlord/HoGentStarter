@@ -1,8 +1,10 @@
 package be.hogent.landtlord.hogentstarter.persistence;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 public class ProjectEntity {
@@ -15,8 +17,6 @@ public class ProjectEntity {
     private LocalDate startDate;
     private LocalDate endDate;
     private double neededFunds;
-    @OneToMany
-    private List<FundsEntity> raisedFunds;
 
     @ManyToOne
     private UserEntity owner;

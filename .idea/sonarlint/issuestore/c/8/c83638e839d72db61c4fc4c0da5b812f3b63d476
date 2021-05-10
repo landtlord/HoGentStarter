@@ -1,0 +1,11 @@
+
+N
+java:S1128"1Remove this unused import 'javax.persistence.Id'.(ş¹ŞÜ8ÖÙÕ‹•/
+w
+java:S1128"URemove this unused import 'be.hogent.landtlord.hogentstarter.persistence.UserEntity'.(¬«Ïßúÿÿÿÿ8®æÖ‹•/
+Z
+java:S1128"=Remove this unused import 'javax.persistence.GeneratedValue'.(¤®À‚8ÖÙÕ‹•/
+Z
+java:S1128"8Remove this unused import 'javax.persistence.ManyToOne'.(ÇÑ²øÿÿÿÿ8ÖÙÕ‹•/
+u
+java:S1128"XRemove this unused import 'be.hogent.landtlord.hogentstarter.persistence.ProjectEntity'.(åéÜ8®æÖ‹•/

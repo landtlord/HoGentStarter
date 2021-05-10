@@ -10,13 +10,13 @@ public interface Mapper<T, U> {
 
     default List<T> toObject(List<U> uList){
         return uList.stream()
-                .map(u -> toObject(u))
+                .map(this::toObject)
                 .collect(Collectors.toList());
     }
 
-    default List<U> toDTO(List<T> oList){
-        return oList.stream()
-                .map(o -> toDTO(o))
+    default List<U> toDTO(List<T> tList){
+        return tList.stream()
+                .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 }
