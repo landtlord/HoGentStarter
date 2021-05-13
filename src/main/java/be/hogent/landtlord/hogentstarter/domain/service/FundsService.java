@@ -10,6 +10,7 @@ import be.hogent.landtlord.hogentstarter.domain.service.dto.UserDTO;
 import be.hogent.landtlord.hogentstarter.domain.service.mappers.FundsMapper;
 import be.hogent.landtlord.hogentstarter.domain.service.mappers.Mapper;
 import be.hogent.landtlord.hogentstarter.domain.service.mappers.ProjectMapper;
+import be.hogent.landtlord.hogentstarter.domain.service.mappers.UserMapper;
 import be.hogent.landtlord.hogentstarter.persistence.repository.FundsRepositoryImpl;
 
 import java.util.Collections;
@@ -25,6 +26,12 @@ public class FundsService {
 
     private Mapper<User, UserDTO> userMapper;
 
+    public FundsService() {
+        this.fundsRepository = new FundsRepositoryImpl();
+        fundsMapper = new FundsMapper();
+        projectMapper = new ProjectMapper();
+        userMapper = new UserMapper();
+    }
 
     public FundsDTO addFunds(FundsDTO fundsDTO) {
         Funds funds = fundsMapper.toObject(fundsDTO);

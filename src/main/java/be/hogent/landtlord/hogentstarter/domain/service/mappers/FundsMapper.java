@@ -1,14 +1,11 @@
 package be.hogent.landtlord.hogentstarter.domain.service.mappers;
 
-import be.hogent.landtlord.hogentstarter.domain.bussines.Comment;
 import be.hogent.landtlord.hogentstarter.domain.bussines.Funds;
 import be.hogent.landtlord.hogentstarter.domain.bussines.Project;
 import be.hogent.landtlord.hogentstarter.domain.bussines.User;
 import be.hogent.landtlord.hogentstarter.domain.service.dto.FundsDTO;
 import be.hogent.landtlord.hogentstarter.domain.service.dto.ProjectDTO;
 import be.hogent.landtlord.hogentstarter.domain.service.dto.UserDTO;
-
-import javax.inject.Inject;
 
 import static java.util.Objects.isNull;
 
@@ -35,6 +32,7 @@ public class FundsMapper implements Mapper<Funds, FundsDTO> {
         UserDTO userDTO = fundsDTO.getUserDTO();
         User user = userMapper.toObject(userDTO);
         funds.setUser(user);
+        funds.setAmount(fundsDTO.getAmount());
 
         return funds;
     }
@@ -53,6 +51,7 @@ public class FundsMapper implements Mapper<Funds, FundsDTO> {
         User user = funds.getUser();
         UserDTO userDTO = userMapper.toDTO(user);
         fundsDTO.setUserDTO(userDTO);
+        fundsDTO.setAmount(funds.getAmount());
 
         return fundsDTO;
     }

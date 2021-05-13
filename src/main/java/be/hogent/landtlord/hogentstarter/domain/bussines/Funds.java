@@ -7,4 +7,5 @@ public class Funds {
     private Long id;
     private Project project;
     private User user;
+    private Double amount;
 }

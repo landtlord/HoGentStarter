@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>HoGent Starter</title>
+</h:head>
+<h:body styleClass="body_content">
+    <h2>HoGent Starter: project info</h2>
+    <h:form>
+        <h:commandLink value="Alle projecten" action="#{projectBean.setAllProjects()}"></h:commandLink>
+        <h:commandLink value="Gebackte projecten" action="#{projectBean.setMyBackedProjects}"></h:commandLink>
+        <h:commandLink value="Eigen projecten" action="#{projectBean.setMyProjects()}"></h:commandLink>
+        <h:commandButton value="Afmelden" action="#{loginBean.logOut()}"></h:commandButton>
+    </h:form>
+    <hr></hr>
+    <h:outputLabel value="#{projectBean.project.title}"></h:outputLabel>
+    <div>
+        Dit project is heeft al <h:outputLabel value="#{projectBean.getFundsInPercentage()}"></h:outputLabel> % van de benodigde fondsen opgehaald.
+    </div>
+    <h:form>
+        <h:outputLabel for="fund" value="Dit project backen voor: "></h:outputLabel>
+        <h:inputText id="fund" value="#{projectBean.fund}"></h:inputText>
+        <h:commandButton value="Backeb" action="#{projectBean.backThisProject()}"></h:commandButton>
+    </h:form>
+</h:body>
+</html>

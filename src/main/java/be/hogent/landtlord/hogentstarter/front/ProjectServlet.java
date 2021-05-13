@@ -1,4 +1,4 @@
-package be.hogent.landtlord.hogentstarter;
+package be.hogent.landtlord.hogentstarter.front;
 
 import be.hogent.landtlord.hogentstarter.domain.service.ProjectService;
 
@@ -7,14 +7,8 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
 @WebServlet(name = "helloServlet", value = "/hello-servlet")
-public class HelloServlet extends HttpServlet {
+public class ProjectServlet extends HttpServlet {
     private String message;
-
-    private ProjectService projectService;
-
-    public HelloServlet() {
-        projectService = new ProjectService();
-    }
 
     public void init() {
         message = "Hello World Servlet!";
@@ -25,9 +19,7 @@ public class HelloServlet extends HttpServlet {
 
         // Hello
         PrintWriter out = response.getWriter();
-        out.println("<html><body>");
         out.println("<h1>" + message + "</h1>");
-        out.println("</body></html>");
     }
 
     public void destroy() {

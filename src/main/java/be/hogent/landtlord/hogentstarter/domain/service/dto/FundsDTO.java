@@ -7,4 +7,5 @@ public class FundsDTO {
     private Long id;
     private ProjectDTO projectDTO;
     private UserDTO userDTO;
+    private Double amount;
 }
