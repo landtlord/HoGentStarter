@@ -11,11 +11,17 @@
     <title>HoGent Starter</title>
 </h:head>
 <h:body styleClass="body_content">
+    <h:outputStylesheet library="css" name="style.css"/>
     <h2>HoGent Starter: project info</h2>
     <h:form>
-        <h:commandLink value="Alle projecten" action="#{projectBean.setAllRunningProjects()}"></h:commandLink>
+        <h:commandLink value="Alle projecten" action="#{projectBean.setAllProjects()}"
+                       rendered="#{projectBean.isAdmin()}"></h:commandLink>
+        <h:commandLink value="Alle huidige projecten" action="#{projectBean.setAllRunningProjects()}"></h:commandLink>
         <h:commandLink value="Gebackte projecten" action="#{projectBean.setMyBackedProjects}"></h:commandLink>
         <h:commandLink value="Eigen projecten" action="#{projectBean.setMyProjects()}"></h:commandLink>
+        <h:commandLink value="Nieuw project" action="#{projectBean.newProject()}"></h:commandLink>
+        <h:commandLink value="Gebruikers" action="#{projectBean.setUsers()}"
+                       rendered="#{projectBean.isAdmin()}"></h:commandLink>
         <h:commandButton value="Afmelden" action="#{loginBean.logOut()}"></h:commandButton>
     </h:form>
     <hr></hr>
@@ -52,8 +58,24 @@
         extra functionaliteit :
         <h:commandButton value="Project verwijderen" action="#{projectBean.deleteThisProject()}"
                          rendered="#{projectBean.isAdmin()}"></h:commandButton>
-        <h:commandButton value="Project afsluiten" action="#{projectBean.deleteThisProject()}"
+        <h:commandButton value="Project afsluiten" action="#{projectBean.closeThisProject()}"
                          rendered="#{projectBean.isOwner()}"></h:commandButton>
     </h:form>
+    <h:form>
+        Nieuwe commentaar toevoegen: <br/>
+        <h:inputTextarea id="description" value="#{projectBean.comment}"/><br/>
+        <h:commandButton value="Opslaan" action="#{projectBean.saveComment()}"></h:commandButton>
+    </h:form>
+    <h:dataTable value="#{projectBean.getComments()}" var="commentDTO">
+        <h:column>
+            <f:facet name="header">Gebruiker</f:facet>
+            #{commentDTO.userDTO.userName}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Commentaar</f:facet>
+            #{commentDTO.comment}
+        </h:column>
+    </h:dataTable>
 </h:body>
 </html>

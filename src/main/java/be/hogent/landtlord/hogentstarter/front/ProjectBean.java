@@ -1,10 +1,8 @@
 package be.hogent.landtlord.hogentstarter.front;
 
 import be.hogent.landtlord.hogentstarter.common.Role;
-import be.hogent.landtlord.hogentstarter.domain.service.FundsService;
-import be.hogent.landtlord.hogentstarter.domain.service.ProjectService;
-import be.hogent.landtlord.hogentstarter.domain.service.ServiceFactory;
-import be.hogent.landtlord.hogentstarter.domain.service.UserService;
+import be.hogent.landtlord.hogentstarter.domain.service.*;
+import be.hogent.landtlord.hogentstarter.domain.service.dto.CommentDTO;
 import be.hogent.landtlord.hogentstarter.domain.service.dto.FundsDTO;
 import be.hogent.landtlord.hogentstarter.domain.service.dto.ProjectDTO;
 import be.hogent.landtlord.hogentstarter.domain.service.dto.UserDTO;
@@ -15,6 +13,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
@@ -31,6 +30,10 @@ public class ProjectBean {
 
     private ProjectDTO project = new ProjectDTO();
 
+    private UserDTO selectedUserDTO;
+
+    private String comment;
+
     public ProjectBean() {
         projects = projectService().getAllRunningProjects();
     }
@@ -38,25 +41,23 @@ public class ProjectBean {
     public String setMyProjects() {
         UserDTO userDTO = getUserDTO();
         projects = projectService().getAllProjectsOwnedBy(userDTO);
-        return userDTO.getRole().toString().toLowerCase(Locale.ROOT);
+        return "page";
     }
 
     public String setAllRunningProjects() {
-        UserDTO userDTO = getUserDTO();
         projects = projectService().getAllRunningProjects();
-        return userDTO.getRole().toString().toLowerCase(Locale.ROOT);
+        return "page";
     }
 
     public String setAllProjects() {
-        UserDTO userDTO = getUserDTO();
         projects = projectService().getAllProjects();
-        return userDTO.getRole().toString().toLowerCase(Locale.ROOT);
+        return "page";
     }
 
     public String setMyBackedProjects() {
         UserDTO userDTO = getUserDTO();
         projects = fundsService().getAllProjectsBackedBy(userDTO);
-        return userDTO.getRole().toString().toLowerCase(Locale.ROOT);
+        return "page";
     }
 
     public String setUsers() {
@@ -92,12 +93,38 @@ public class ProjectBean {
     }
 
     public String deleteThisProject(){
-        projectService().deleteProject(project);
+        project = projectService().deleteProject(project);
         return "projectView";
     }
 
     public String closeThisProject(){
-        projectService().closeProject(project);
+        project = projectService().closeProject(project);
+        return "projectView";
+    }
+
+    public String approveUser(){
+        userService().approveUser(selectedUserDTO);
+        return "userview";
+    }
+
+    public String saveChangesInUser(){
+        selectedUserDTO = userService().changeUser(selectedUserDTO);
+        return "userDetailView";
+    }
+
+    public String goToUserView(){
+        return "userDetailView";
+    }
+
+    public String saveComment() {
+        UserDTO user = getUserDTO();
+        CommentDTO commentDTO = new CommentDTO();
+        commentDTO.setUserDTO(user);
+        commentDTO.setComment(comment);
+        commentDTO.setProjectDTO(project);
+        commentDTO.setCommentTime(LocalDate.now());
+        commentService().addComment(commentDTO);
+        comment = null;
         return "projectView";
     }
 
@@ -133,6 +160,10 @@ public class ProjectBean {
         return project.getEndDate().format(DateTimeFormatter.ofPattern("EEE dd MMMM yyyy"));
     }
 
+    public List<CommentDTO> getComments(){
+        return commentService().getCommentsFor(project);
+    }
+
     private UserDTO getUserDTO() {
         ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
         HttpSession currentSession = (HttpSession) ctx.getSession(true);
@@ -149,6 +180,10 @@ public class ProjectBean {
 
     private UserService userService() {
         return ServiceFactory.getInstance().getUserService();
+    }
+
+    private CommentService commentService() {
+        return ServiceFactory.getInstance().getCommentService();
     }
 }
 

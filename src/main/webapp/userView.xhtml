@@ -12,29 +12,45 @@
     <title>HoGent Starter</title>
 </h:head>
 <h:body styleClass="body_content">
+    <h:outputStylesheet library="css" name="style.css"  />
     <h2>HoGent Starter Admin</h2>
-        <h:form>
-            <h:commandLink value="Alle projecten" action="#{projectBean.allRunningProjects()}"></h:commandLink>
-            <h:commandLink value="Gebackte projecten" action="#{projectBean.setMyBackedProjects}"></h:commandLink>
-            <h:commandLink value="Eigen projecten" action="#{projectBean.setMyProjects()}"></h:commandLink>
-            <h:commandLink value="Gebruikers" action="#{projectBean.setUsers()}"></h:commandLink>
-            <h:commandButton value="Afmelden" action="#{loginBean.logOut()}"></h:commandButton>
-        </h:form>
+    <h:form>
+        <h:commandLink value="Alle projecten" action="#{projectBean.setAllProjects()}" rendered="#{projectBean.isAdmin()}"></h:commandLink>
+        <h:commandLink value="Alle huidige projecten" action="#{projectBean.setAllRunningProjects()}"></h:commandLink>
+        <h:commandLink value="Gebackte projecten" action="#{projectBean.setMyBackedProjects}"></h:commandLink>
+        <h:commandLink value="Eigen projecten" action="#{projectBean.setMyProjects()}"></h:commandLink>
+        <h:commandLink value="Nieuw project" action="#{projectBean.newProject()}"></h:commandLink>
+        <h:commandLink value="Gebruikers" action="#{projectBean.setUsers()}"  rendered="#{projectBean.isAdmin()}"></h:commandLink>
+        <h:commandButton value="Afmelden" action="#{loginBean.logOut()}"></h:commandButton>
+    </h:form>
     <hr></hr>
     <h:dataTable value="#{projectBean.users}" var="user">
         <h:column>
             <f:facet name="header">Id</f:facet>
             #{user.id}
         </h:column>
-
         <h:column>
             <f:facet name="header">Gebruikersnaam</f:facet>
             #{user.userName}
         </h:column>
-
         <h:column>
             <f:facet name="header">Rol</f:facet>
             #{user.role}
+        </h:column>
+        <h:column>
+            <f:facet name="header"></f:facet>
+            <h:form>
+                <h:commandButton value="edit" action="#{projectBean.goToUserView()}">
+                    <f:setPropertyActionListener value="#{user}"
+                                                 target="#{projectBean.selectedUserDTO}"/>
+                </h:commandButton>
+            </h:form>
+            <h:form>
+            <h:commandButton value="approve" action="#{projectBean.approveUser()}" rendered="#{!user.approved}">
+                <f:setPropertyActionListener value="#{user}"
+                                             target="#{projectBean.selectedUserDTO}"/>
+            </h:commandButton>
+        </h:form>
         </h:column>
     </h:dataTable>
 </h:body>

@@ -9,4 +9,5 @@ public class User {
     private String userName;
     private String password;
     private Role role;
+    private boolean approved;
 }

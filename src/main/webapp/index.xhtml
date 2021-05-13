@@ -9,13 +9,16 @@
     <title>HoGent Starter</title>
 </h:head>
 <h:body styleClass="body_content">
+    <h:outputStylesheet library="css" name="style.css"  />
     <h2>HoGent Starter</h2>
     <h:form id="loginForm" styleClass="login">
+        Nieuwe gebruiker? Vul uw gebruikersnaam en paswoord in. Een beheerder zal zo snel mogelijk de aanvraag behandelen. <br/>
         <h:outputLabel for="login" value="UserName:"></h:outputLabel>
         <h:inputText id="login" value="#{loginBean.userName}"></h:inputText>
         <h:outputLabel id="password" value="Password:"></h:outputLabel>
         <h:inputSecret value="#{loginBean.password}"></h:inputSecret>
         <h:commandButton value="Aanmelden" action="#{loginBean.login()}"></h:commandButton>
+        <h:commandButton value="Registreren" action="#{loginBean.register()}"></h:commandButton>
     </h:form>
     <hr></hr>
     <h:dataTable value="#{projectsBean.refresh()}" var="project">

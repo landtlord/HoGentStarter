@@ -11,6 +11,7 @@ public class UserMapper implements Mapper<User, UserEntity> {
         user.setUserName(userEntity.getUserName());
         user.setPassword(userEntity.getPassword());
         user.setRole(userEntity.getRole());
+        user.setApproved(userEntity.isApproved());
 
         return user;
     }
@@ -22,6 +23,7 @@ public class UserMapper implements Mapper<User, UserEntity> {
         userEntity.setUserName(user.getUserName());
         userEntity.setPassword(user.getPassword());
         userEntity.setRole(user.getRole());
+        userEntity.setApproved(user.isApproved());
 
         return userEntity;
     }

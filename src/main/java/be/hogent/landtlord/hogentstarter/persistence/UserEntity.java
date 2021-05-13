@@ -17,4 +17,5 @@ public class UserEntity {
     private String password;
     @Enumerated
     private Role role;
+    private boolean approved;
  }

@@ -42,9 +42,14 @@ public class UserService {
 
     public UserDTO doLogin(String userName, String password) {
         User user = userRepository.findUserBy(userName);
-        if (nonNull(user) && password.equals(user.getPassword())) {
+        if (nonNull(user) && password.equals(user.getPassword()) && user.isApproved()) {
             return userMapper.toDTO(user);
         }
         return null;
+    }
+
+    public UserDTO approveUser(UserDTO userDTO) {
+        userDTO.setApproved(true);
+        return changeUser(userDTO);
     }
 }

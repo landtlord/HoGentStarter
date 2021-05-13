@@ -18,6 +18,7 @@ public class UserMapper implements Mapper<User, UserDTO> {
         user.setUserName(userDTO.getUserName());
         user.setPassword(userDTO.getPassword());
         user.setRole(userDTO.getRole());
+        user.setApproved(userDTO.isApproved());
 
         return user;
     }
@@ -34,6 +35,7 @@ public class UserMapper implements Mapper<User, UserDTO> {
         userDTO.setUserName(user.getUserName());
         userDTO.setPassword(user.getPassword());
         userDTO.setRole(user.getRole());
+        userDTO.setApproved(user.isApproved());
 
         return userDTO;
     }

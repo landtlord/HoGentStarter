@@ -3,17 +3,17 @@
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>HoGent Starter</title>
 </h:head>
 <h:body styleClass="body_content">
     <h:outputStylesheet library="css" name="style.css"  />
-    <h2>HoGent Starter: nieuw project</h2>
+    <h2>HoGent Starter Admin</h2>
     <h:form>
         <h:commandLink value="Alle projecten" action="#{projectBean.setAllProjects()}" rendered="#{projectBean.isAdmin()}"></h:commandLink>
         <h:commandLink value="Alle huidige projecten" action="#{projectBean.setAllRunningProjects()}"></h:commandLink>
@@ -25,18 +25,11 @@
     </h:form>
     <hr></hr>
     <h:form>
-        <h:outputLabel for="title">Titel: </h:outputLabel>
-        <h:inputText id="title" value="#{projectBean.project.title}" required="true" requiredMessage="Titel is verplicht"/><br/>
-        <h:outputLabel for="description">Beschrijving: </h:outputLabel> <br/>
-        <h:inputTextarea id="description" value="#{projectBean.project.description}"/><br/>
-        <h:outputLabel for="startDate">Begin datum: </h:outputLabel>
-        <h:inputText id="startDate" a:type="date" value="#{projectBean.project.startDate}" converter="dateConverter" /><br/>
-        <h:outputLabel for="endDate">Eind datum: </h:outputLabel>
-        <h:inputText id="endDate" a:type="date" value="#{projectBean.project.endDate}" converter="dateConverter"/><br/>
-        <h:outputLabel for="neededFunds">Benodigde fondsen: </h:outputLabel>
-        <h:inputText id="neededFunds" value="#{projectBean.project.neededFunds}" /><br/>
-        <h:commandButton value="cancel" action="#{projectBean.allRunningProjects()}"></h:commandButton>
-        <h:commandButton value="save" action="#{projectBean.saveProject()}"></h:commandButton>
+        Gebruikersnaam : <h:outputLabel value="#{projectBean.selectedUserDTO.userName}"></h:outputLabel><br/>
+        Nieuwe gebruikersnaam : <h:inputText value="#{projectBean.selectedUserDTO.userName}"></h:inputText>
+        Rol : <h:outputLabel value="#{projectBean.selectedUserDTO.role}"></h:outputLabel><br/>
+        Goedgekeurd : <h:outputLabel value="#{projectBean.selectedUserDTO.approved}"></h:outputLabel>
+        <h:commandButton value="opslaan" action="#{projectBean.saveChangesInUser()}"></h:commandButton>
     </h:form>
 </h:body>
 </html>

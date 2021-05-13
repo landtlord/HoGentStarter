@@ -26,6 +26,5 @@ public class ProjectsBean {
         projects = projectService().getAllRunningProjects();
         return projects;
     }
-
 }
 
