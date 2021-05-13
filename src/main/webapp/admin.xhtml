@@ -15,6 +15,7 @@
     <h2>HoGent Starter Admin</h2>
     <h:form>
         <h:commandLink value="Alle projecten" action="#{projectBean.setAllProjects()}"></h:commandLink>
+        <h:commandLink value="Alle huidige projecten" action="#{projectBean.setAllRunningProjects()}"></h:commandLink>
         <h:commandLink value="Gebackte projecten" action="#{projectBean.setMyBackedProjects}"></h:commandLink>
         <h:commandLink value="Eigen projecten" action="#{projectBean.setMyProjects()}"></h:commandLink>
         <h:commandLink value="Nieuw project" action="#{projectBean.newProject()}"></h:commandLink>

@@ -14,5 +14,4 @@ public class ProjectDTO {
     private LocalDate endDate;
     private double neededFunds;
     private UserDTO owner;
-
 }

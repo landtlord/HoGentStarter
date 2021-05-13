@@ -1,5 +1,6 @@
 package be.hogent.landtlord.hogentstarter.front;
 
+import be.hogent.landtlord.hogentstarter.common.Role;
 import be.hogent.landtlord.hogentstarter.domain.service.FundsService;
 import be.hogent.landtlord.hogentstarter.domain.service.ProjectService;
 import be.hogent.landtlord.hogentstarter.domain.service.ServiceFactory;
@@ -14,6 +15,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 
@@ -30,12 +32,18 @@ public class ProjectBean {
     private ProjectDTO project = new ProjectDTO();
 
     public ProjectBean() {
-        projects = projectService().getAllProjects();
+        projects = projectService().getAllRunningProjects();
     }
 
     public String setMyProjects() {
         UserDTO userDTO = getUserDTO();
         projects = projectService().getAllProjectsOwnedBy(userDTO);
+        return userDTO.getRole().toString().toLowerCase(Locale.ROOT);
+    }
+
+    public String setAllRunningProjects() {
+        UserDTO userDTO = getUserDTO();
+        projects = projectService().getAllRunningProjects();
         return userDTO.getRole().toString().toLowerCase(Locale.ROOT);
     }
 
@@ -83,6 +91,16 @@ public class ProjectBean {
         return "projectView";
     }
 
+    public String deleteThisProject(){
+        projectService().deleteProject(project);
+        return "projectView";
+    }
+
+    public String closeThisProject(){
+        projectService().closeProject(project);
+        return "projectView";
+    }
+
     public Double getFundsForProject() {
         List<FundsDTO> funds = fundsService().getFundsFor(project);
 
@@ -94,6 +112,25 @@ public class ProjectBean {
     public int getFundsInPercentage(){
         double result = Math.floor((getFundsForProject()/project.getNeededFunds())  * 100);
         return (int) result;
+    }
+
+    public boolean isAdmin(){
+        return Role.ADMIN.equals(getUserDTO().getRole());
+    }
+
+    public boolean isOwner(){
+        return project.getOwner().equals(getUserDTO());
+    }
+
+    public boolean needsExtraFunctionality(){
+        return isAdmin()||isOwner();
+    }
+
+    public String getStartDateFormatted(){
+        return project.getStartDate().format(DateTimeFormatter.ofPattern("EEE dd MMMM yyyy"));
+    }
+    public String getEndDateFormatted(){
+        return project.getEndDate().format(DateTimeFormatter.ofPattern("EEE dd MMMM yyyy"));
     }
 
     private UserDTO getUserDTO() {

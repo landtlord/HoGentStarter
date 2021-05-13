@@ -16,4 +16,6 @@ public interface ProjectRepository {
     Project update(Project project);
 
     List<Project> findAllProjectsOwnedBy(User user);
+
+    List<Project> findAllRunningProjects();
 }

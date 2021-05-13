@@ -12,6 +12,7 @@ import be.hogent.landtlord.hogentstarter.persistence.mappers.UserMapper;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ProjectRepositoryImpl implements ProjectRepository {
@@ -66,6 +67,16 @@ public class ProjectRepositoryImpl implements ProjectRepository {
         UserEntity userEntity = userMapper.toEntity(user);
         TypedQuery<ProjectEntity> query = entityManager.createQuery("Select p from ProjectEntity p where p.owner = :owner ", ProjectEntity.class);
         query.setParameter("owner", userEntity);
+        List<ProjectEntity> projectEntities = query.getResultList();
+        entityManager.close();
+        return projectMapper.toObject(projectEntities);
+    }
+
+    @Override
+    public List<Project> findAllRunningProjects() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        TypedQuery<ProjectEntity> query = entityManager.createQuery("Select p from ProjectEntity p where p.deleted = false and p.endDate > :endDate", ProjectEntity.class);
+        query.setParameter("endDate", LocalDate.now());
         List<ProjectEntity> projectEntities = query.getResultList();
         entityManager.close();
         return projectMapper.toObject(projectEntities);

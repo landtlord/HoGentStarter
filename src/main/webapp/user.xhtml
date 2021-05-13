@@ -13,7 +13,7 @@
 <h:body styleClass="body_content">
     <h2>HoGent Starter User</h2>
     <h:form>
-        <h:commandLink value="Alle projecten" action="#{projectBean.setAllProjects()}"></h:commandLink>
+        <h:commandLink value="Alle projecten" action="#{projectBean.allRunningProjects()}"></h:commandLink>
         <h:commandLink value="Gebackte projecten" action="#{projectBean.setMyBackedProjects}"></h:commandLink>
         <h:commandLink value="Eigen projecten" action="#{projectBean.setMyProjects()}"></h:commandLink>
         <h:commandButton value="Afmelden" action="#{loginBean.logOut()}"></h:commandButton>

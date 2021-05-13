@@ -28,6 +28,11 @@ public class ProjectService {
         userMapper = new UserMapper();
     }
 
+    public List<ProjectDTO> getAllRunningProjects() {
+        List<Project> projects = projectRepository.findAllRunningProjects();
+        return projectMapper.toDTO(projects);
+    }
+
     public List<ProjectDTO> getAllProjects() {
         List<Project> projects = projectRepository.findAllProjects();
         return projectMapper.toDTO(projects);
@@ -45,15 +50,15 @@ public class ProjectService {
         return projectMapper.toDTO(project);
     }
 
-    public ProjectDTO deleteProject(Long projectId) {
-        Project project = projectRepository.findById(projectId);
+    public ProjectDTO deleteProject(ProjectDTO projectDTO) {
+        Project project = projectRepository.findById(projectDTO.getId());
         project.delete();
         project = projectRepository.update(project);
         return projectMapper.toDTO(project);
     }
 
-    public ProjectDTO closeProject(Long projectId) {
-        Project project = projectRepository.findById(projectId);
+    public ProjectDTO closeProject(ProjectDTO projectDTO) {
+        Project project = projectRepository.findById(projectDTO.getId());
         project.close();
         project = projectRepository.update(project);
         return projectMapper.toDTO(project);

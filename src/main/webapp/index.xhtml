@@ -18,7 +18,7 @@
         <h:commandButton value="Aanmelden" action="#{loginBean.login()}"></h:commandButton>
     </h:form>
     <hr></hr>
-    <h:dataTable value="#{projectsBean.projects}" var="project">
+    <h:dataTable value="#{projectsBean.refresh()}" var="project">
         <h:column>
             <f:facet name="header">Titel</f:facet>
             #{project.title}

@@ -1,6 +1,5 @@
 package be.hogent.landtlord.hogentstarter;
 
-import be.hogent.landtlord.hogentstarter.domain.bussines.User;
 import be.hogent.landtlord.hogentstarter.domain.service.ProjectService;
 import be.hogent.landtlord.hogentstarter.domain.service.UserService;
 import be.hogent.landtlord.hogentstarter.domain.service.dto.ProjectDTO;
@@ -28,6 +27,6 @@ public class starter {
         ProjectDTO project = projectService.createProject(projectDTO);
 
         System.out.println(project);
-        System.out.println(projectService.getAllProjects());
+        System.out.println(projectService.getAllRunningProjects());
     }
 }
