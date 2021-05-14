@@ -7,9 +7,10 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>HoGent Starter</title>
+    <link href="resources/css/style.css" rel="stylesheet" type="text/css"></link>
 </h:head>
 <h:body styleClass="body_content">
-    <h:outputStylesheet library="css" name="style.css"  />
+
     <h2>HoGent Starter</h2>
     <h:form id="loginForm" styleClass="login">
         Nieuwe gebruiker? Vul uw gebruikersnaam en paswoord in. Een beheerder zal zo snel mogelijk de aanvraag behandelen. <br/>
@@ -21,25 +22,30 @@
         <h:commandButton value="Registreren" action="#{loginBean.register()}"></h:commandButton>
     </h:form>
     <hr></hr>
-    <h:dataTable value="#{projectsBean.refresh()}" var="project">
+    <h:dataTable value="#{projectsBean.refresh()}" var="project"
+                 columnClasses="title,description,funds,startDate,endDate">
         <h:column>
             <f:facet name="header">Titel</f:facet>
             #{project.title}
         </h:column>
 
-        <h:column>
+        <h:column styleclass="description">
             <f:facet name="header">Beschrijving</f:facet>
             #{project.description}
         </h:column>
 
-        <h:column>
+        <h:column id="funds">
             <f:facet name="header">Benodigde fondsen</f:facet>
             #{project.neededFunds}
         </h:column>
 
-        <h:column>
+        <h:column id="startDate">
             <f:facet name="header">Begin datum</f:facet>
             #{project.startDate}
+        </h:column>
+        <h:column id="endDate">
+            <f:facet name="header">Eind datum</f:facet>
+            #{project.endDate}
         </h:column>
     </h:dataTable>
 </h:body>

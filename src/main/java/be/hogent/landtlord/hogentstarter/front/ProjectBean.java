@@ -36,6 +36,7 @@ public class ProjectBean {
 
     public ProjectBean() {
         projects = projectService().getAllRunningProjects();
+        System.out.println("projectbean initiated");
     }
 
     public String setMyProjects() {

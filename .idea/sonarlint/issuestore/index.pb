@@ -113,12 +113,8 @@ w
 Gsrc/main/java/be/hogent/landtlord/hogentstarter/front/ProjectsBean.java,3\5\35e644b4cffda0ed217897607ccfb5169d35eb7e
 P
  src/main/webapp/projectNew.xhtml,3\4\34c6a82102364882a09e6ced6432627cf072fdfd
-J
-src/main/webapp/user.xhtml,1\e\1e265662bacd556641c4a121ab97e79fbc4264d5
 N
 src/main/webapp/userView.xhtml,1\9\1917af60b8b9655db44394a84ab10238d0223b3b
-K
-src/main/webapp/admin.xhtml,7\f\7fd576e8411a6512f80f1fd1140b417df6ad0564
 Q
 !src/main/webapp/projectView.xhtml,b\3\b32394aec010c03d0f5f37abaf0ed0314f21bc8d
 t
@@ -127,3 +123,13 @@ v
 Fsrc/main/java/be/hogent/landtlord/hogentstarter/front/ProjectBean.java,0\2\022d49eed4e137707c459efe5f08c7a4f23517f4
 ‚
 Rsrc/main/java/be/hogent/landtlord/hogentstarter/front/converter/dateConverter.java,d\d\ddc9c5d96fee09d3166819db32a8bfd1ad4fe839
+~
+Nsrc/main/java/be/hogent/landtlord/hogentstarter/persistence/CommentEntity.java,5\f\5fdb8182060f9212c9088cfe816c6d9eecaa8a72
+†
+Vsrc/main/java/be/hogent/landtlord/hogentstarter/persistence/mappers/CommentMapper.java,6\6\66ab50bd1d439ca2ee3bcc27cd5b3116386172b5
+W
+'src/main/webapp/resources/css/style.css,7\9\793286005b9090bf4b63c9281f5cbde07930695e
+T
+$src/main/webapp/userDetailView.xhtml,c\3\c3a780dca80831b3cb065ff22f5d4753194cdf81
+J
+src/main/webapp/page.xhtml,f\a\fa7cfc191a01337c373cada343bed505511a4197

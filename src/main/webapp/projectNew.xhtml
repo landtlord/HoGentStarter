@@ -10,9 +10,9 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <title>HoGent Starter</title>
+    <link href="resources/css/style.css" rel="stylesheet" type="text/css"></link>
 </h:head>
 <h:body styleClass="body_content">
-    <h:outputStylesheet library="css" name="style.css"  />
     <h2>HoGent Starter: nieuw project</h2>
     <h:form>
         <h:commandLink value="Alle projecten" action="#{projectBean.setAllProjects()}" rendered="#{projectBean.isAdmin()}"></h:commandLink>

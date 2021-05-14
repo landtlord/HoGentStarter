@@ -45,6 +45,7 @@ public class UserRepositoryImpl implements UserRepository {
         userEntity.setRole(user.getRole());
         userEntity.setUserName(user.getUserName());
         userEntity.setPassword(user.getPassword());
+        userEntity.setApproved(user.isApproved());
         persist(entityManager, userEntity);
         return userMapper.toObject(userEntity);
     }
